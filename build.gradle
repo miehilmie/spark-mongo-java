@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  compile 'org.apache.spark:spark-core_2.10:1.5.1'
+  compile 'org.mongodb.mongo-hadoop:mongo-hadoop-core:1.4.1'
+  compile 'org.mongodb:mongo-java-driver:3.0.4'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'sparkmongo.Main'
+    }
+}
+
+task copyToLib(type: Copy) {
+    into "$buildDir/output/lib"
+    from configurations.runtime
+}
+
+build.dependsOn copyToLib

@@ -1,0 +1,5 @@
+build
+metastore_db
+tmp
+derby.log
+.gradle
